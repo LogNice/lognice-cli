@@ -1,8 +1,8 @@
 # Log(N)ice CLI 🚀🚀🚀
 
 ```
-docker build -t lognice-cli .
-docker run --rm lognice-cli [command] [options]
+docker build -t lognice_cli .
+docker run --rm lognice_cli [command] [options]
 ```
 
 ### Create a session
@@ -25,7 +25,7 @@ class Validator:
 Then run:
 
 ```shell
-docker run --rm lognice-cli create -f validator.py
+docker run --rm lognice_cli create -f validator.py
 ```
 
 ### Submit a solution
@@ -41,7 +41,7 @@ class Solution:
 Then run:
 
 ```shell
-docker run --rm lognice-cli submit -s session_id -f solution.py -u username
+docker run --rm lognice_cli submit -s session_id -f solution.py -u username
 ```
 
 ### Get results
@@ -49,7 +49,7 @@ docker run --rm lognice-cli submit -s session_id -f solution.py -u username
 #### Table summary
 
 ```shell
-docker run --rm lognice-cli summary -s session_id
+docker run --rm lognice_cli summary -s session_id
 ```
 
 Example output:
@@ -71,5 +71,5 @@ Example output:
 You can also download a bar plot image containing the results of a session.
 
 ```shell
-docker run --rm lognice-cli graph -s session_id
+docker run --rm lognice_cli graph -s session_id
 ```
