@@ -30,7 +30,7 @@ docker run --rm lognice-cli create -f validator.py
 
 #### Submit a solution
 
-Create a 'Solution' class like so:
+Create a `Solution` class like so:
 
 ```python
 class Solution:
