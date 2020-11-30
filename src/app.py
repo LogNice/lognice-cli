@@ -55,7 +55,7 @@ def create(filepath):
 @cli.command()
 @click.option('-s', '--session-id', help='Session id you are submitting to.', required=True, type=str)
 @click.option('-u', '--username', help='Your username, must be unique.', required=True, type=str)
-@click.option('-f', '--filepath', help='Validator (test cases) filepath.', required=True, type=str)
+@click.option('-f', '--filepath', help='Solution filepath.', required=True, type=str)
 @click.option('-t', '--token', help='Token from previous submission.', required=False, type=str)
 def submit(session_id, username, filepath, token=None):
     '''Submit a solution to a session.'''
