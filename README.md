@@ -5,7 +5,7 @@ docker build -t lognice-cli .
 docker run --rm lognice-cli [command] [options]
 ```
 
-#### Create a session
+### Create a session
 
 Create a `Validator` class like so:
 
@@ -28,7 +28,7 @@ Then run:
 docker run --rm lognice-cli create -f validator.py
 ```
 
-#### Submit a solution
+### Submit a solution
 
 Create a `Solution` class like so:
 
@@ -44,9 +44,9 @@ Then run:
 docker run --rm lognice-cli submit -s session_id -f solution.py -u username
 ```
 
-#### Get results
+### Get results
 
-##### Table summary
+#### Table summary
 
 ```shell
 docker run --rm lognice-cli summary -s session_id
@@ -66,7 +66,7 @@ Example output:
 +------+-----------+----------------+
 ```
 
-##### Graph summary
+#### Graph summary
 
 You can also download a bar plot image containing the results of a session.
 
