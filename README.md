@@ -7,24 +7,41 @@ docker run --rm lognice-cli [command] [options]
 
 #### Create a session
 
-```shell
-$ cat validator.py
+Create a `Validator` class like so:
+
+```python
 class Validator:
     def tests(self):
-        return [{'input': {'n': i}, 'output': 2 * i} for i in range(100)]
-$ docker run --rm lognice-cli create -f validator.py
-Session id: 2dc85
+        return [
+            {
+                'input': {'n': i},
+                'output': 2 * i
+            }
+            for i in range(100)
+        ]
+
+```
+
+Then run:
+
+```shell
+docker run --rm lognice-cli create -f validator.py
 ```
 
 #### Submit a solution
 
-```shell
-$ cat solution.py
+Create a 'Solution' class like so:
+
+```python
 class Solution:
     def solve(self, n):
         return 2 * n
-$ docker run --rm lognice-cli submit -s 2dc85 -f solution.py -u fancy_username
-...
+```
+
+Then run:
+
+```shell
+docker run --rm lognice-cli submit -s session_id -f solution.py -u username
 ```
 
 #### Get results
@@ -32,7 +49,12 @@ $ docker run --rm lognice-cli submit -s 2dc85 -f solution.py -u fancy_username
 ##### Table summary
 
 ```shell
-$ docker run --rm lognice-cli summary -s 2dc85
+docker run --rm lognice-cli summary -s session_id
+```
+
+Example output:
+
+```
 +-----------------------------------+
 |          [2dc85] Ranking          |
 +------+-----------+----------------+
@@ -46,7 +68,8 @@ $ docker run --rm lognice-cli summary -s 2dc85
 
 ##### Graph summary
 
+You can also download a bar plot image containing the results of a session.
+
 ```shell
-$ docker run --rm lognice-cli graph -s 2dc85
-Image saved in 2dc85.png
+docker run --rm lognice-cli graph -s session_id
 ```
