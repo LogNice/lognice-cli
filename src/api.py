@@ -22,6 +22,4 @@ def session_summary_table(session_id, url_base):
 
 def session_summary_graph(session_id, url_base):
     url = '%s/summary/graph/%s' % (url_base, session_id)
-    filename = '%s.png' % session_id
-    open(filename, 'wb').write(requests.get(url).content)
-    return filename
+    return requests.get(url).content

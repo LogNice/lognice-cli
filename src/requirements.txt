@@ -1,4 +1,5 @@
 click
 colored
 requests
+python-dotenv
 python-socketio

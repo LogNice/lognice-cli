@@ -2,6 +2,7 @@ import os
 import click
 import socketio
 from colored import fg, attr, stylize
+from dotenv import load_dotenv
 from api import (
     create_session,
     submit_solution,
@@ -10,6 +11,9 @@ from api import (
     session_summary_graph
 )
 
+load_dotenv()
+
+VOLUME = os.environ.get('VOLUME')
 BASE_URL = None
 STYLES = {
     'success': fg(10) + attr(1),
@@ -35,6 +39,7 @@ def cli(base_url):
 @click.option('-f', '--filepath', help='Validator (test cases) filepath.', required=True, type=str)
 def create(filepath):
     '''Create a new session.'''
+    filepath = os.path.join(VOLUME, filepath)
     if not os.path.exists(filepath):
         log('File does not exist.', 'error')
         return
@@ -106,6 +111,7 @@ def submit(session_id, username, filepath, token=None):
             log(data['time']['value'], 'important')
         disconnect()
 
+    filepath = os.path.join(VOLUME, filepath)
     if not os.path.exists(filepath):
         log('File does not exist.', 'error')
         return
@@ -127,7 +133,10 @@ def summary(session_id):
 @click.option('-s', '--session-id', help='Session id for which you want a graph summary.', required=True, type=str)
 def graph(session_id):
     '''Download a graph summary for a given session id.'''
-    filename = session_summary_graph(session_id, BASE_URL)
+    content = session_summary_graph(session_id, BASE_URL)
+    filename = '%s.png' % session_id
+    filepath = os.path.join(VOLUME, filename)
+    open(filepath, 'wb').write(content)
     print('Image saved in %s' % filename)
 
 if __name__ == '__main__':
