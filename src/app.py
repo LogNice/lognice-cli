@@ -25,7 +25,7 @@ STYLES = {
 }
 
 def log(s, style='success', end='\n'):
-    print(stylize(s, STYLES[style]), end=end)
+    print(stylize(s, STYLES[style]), end=end, flush=True)
 
 @click.group()
 @click.option('-b', '--base-url', help='Server base url.', default='http://localhost:5000', type=str)
