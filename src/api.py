@@ -21,5 +21,5 @@ def session_summary_table(session_id, url_base):
     return requests.get('%s/api/summary/table/%s' % (url_base, session_id)).json()
 
 def session_summary_graph(session_id, url_base):
-    url = '%s/summary/graph/%s' % (url_base, session_id)
+    url = '%s/api/summary/graph/%s' % (url_base, session_id)
     return requests.get(url).content
