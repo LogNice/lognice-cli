@@ -127,7 +127,7 @@ def summary(session_id):
         log(r['message'], 'error')
         return
 
-    print(r['result'])
+    print(r['result']['summary_str'])
 
 @cli.command()
 @click.option('-s', '--session-id', help='Session id for which you want a graph summary.', required=True, type=str)
