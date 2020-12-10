@@ -97,18 +97,22 @@ def submit(session_id, username, filepath, token=None):
 
     @sio.on('task_finished')
     def on_evaluated(data):
-        blocker = data['blocker']
-        if blocker:
-            log('You didn\'t pass the following test case:', 'error')
-            log('Input: %s' % ', '.join(['%s=%s' % (k, str(v)) for k, v in blocker['input'].items()]), 'info')
-            log('Expected output: %s' % blocker['expected'], 'info')
-            log('Your output: %s' % blocker['output'], 'info')
+        if data['status'] == 'success':
+            result = data['result']
+            blocker = result['blocker']
+            if blocker:
+                log('You didn\'t pass the following test case:', 'error')
+                log('Input: %s' % ', '.join(['%s=%s' % (k, str(v)) for k, v in blocker['input'].items()]), 'info')
+                log('Expected output: %s' % blocker['expected'], 'info')
+                log('Your output: %s' % blocker['output'], 'info')
+            else:
+                log('You passed all', end=' ')
+                log(result['passed'], 'important', ' ')
+                log('test cases!')
+                log('CPU Time in %s:' % result['time']['unit'], 'normal', ' ')
+                log(result['time']['value'], 'important')
         else:
-            log('You passed all', end=' ')
-            log(data['passed'], 'important', ' ')
-            log('test cases!')
-            log('CPU Time in %s:' % data['time']['unit'], 'normal', ' ')
-            log(data['time']['value'], 'important')
+            log(data['message'], 'error')
         disconnect()
 
     filepath = os.path.join(VOLUME, filepath)
